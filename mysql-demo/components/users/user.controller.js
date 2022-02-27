@@ -23,7 +23,6 @@ async function register(req, res) {
     user = await UserServices.createNewOne(user);
 
     //send response
-
     res.json({
       message: "Register success",
       user,

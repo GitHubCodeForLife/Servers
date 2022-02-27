@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const db = require("./config/db.config");
-const bodyParser = require("body-parser");
 const TutorialRouter = require("./components/tutorials/tutorial.router");
 const UserRouter = require("./components/users/user.router");
 
