@@ -5,7 +5,7 @@ const User = sequelize.define(
   "User",
   {
     // Model attributes are defined here
-    username: {
+    name: {
       type: DataTypes.STRING,
     },
     password: {

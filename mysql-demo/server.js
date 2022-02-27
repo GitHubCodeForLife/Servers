@@ -5,6 +5,7 @@ const app = express();
 const db = require("./config/db.config");
 const bodyParser = require("body-parser");
 const TutorialRouter = require("./components/tutorials/tutorial.router");
+const UserRouter = require("./components/users/user.router");
 
 db.sync().then(console.log("Syncing Database Done!"));
 //create all tables
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //api
 app.use("/api/tutorials", TutorialRouter);
+app.use("/api/users", UserRouter);
 
 // simple route
 app.get("/", (req, res) => {

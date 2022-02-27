@@ -18,9 +18,19 @@ exports.create = async (data) => {
     };
   }
 };
-exports.getAll = async (data) => {
+exports.getAll = async () => {
   try {
     const tutorials = await Tutorial.findAll();
+    return tutorials;
+  } catch (error) {}
+};
+
+exports.getDataByPage = async (page) => {
+  try {
+    const tutorials = await Tutorial.findAll({
+      limit: 10,
+      offset: page,
+    });
     return tutorials;
   } catch (error) {}
 };

@@ -1,9 +1,12 @@
+// Auth.js
 const jwt = require("jsonwebtoken");
 
 function auth(req, res, next) {
-  const token = req.header("auth-token");
-  if (!token) return res.status(401).send("Authentication fail");
+  //header bearer token
+  let token = req.headers.authorization;
 
+  if (!token) return res.status(401).send("Access denied. No token provided.");
+  token = token.replace("Bearer ", "");
   try {
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     req.user = verified;
@@ -13,11 +16,11 @@ function auth(req, res, next) {
   }
 }
 
-exports.signJWT = (obj) => {
-  const token = jwt.sign({ ...obj }, process.env.TOKEN_SECRET, {
-    expiresIn: "1h",
-  });
-  return token;
-};
+function alreadyAuth(res, res, next) {
+  if (req.user) {
+    return res.status(401).send("Already authenticated");
+  }
+  next();
+}
 
 module.exports.auth = auth;
